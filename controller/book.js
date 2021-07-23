@@ -58,3 +58,13 @@ exports.updateYouthBranch = async (req, res, next) => {
     return res.status(401).json({ message: "SID not found!" });
   }
 };
+
+exports.deleteBook = async (req, res, next) => {
+  const book = await Book.findOne({ SID: req.body.SID });
+  if (book) {
+    await Book.deleteOne({ _id: book._id });
+    return res.status(200).json({ message: "Book deleted!" });
+  } else {
+    return res.status(401).json({ message: "Book not found!" });
+  }
+};

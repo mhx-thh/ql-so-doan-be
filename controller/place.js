@@ -12,7 +12,7 @@ exports.createPlace = async (req, res, next) => {
         .catch(err => {
             res.status(400).json({ message: err.message });
         });
-}
+};
 
 exports.updatePlace = async (req, res, next) => {
     const place = await Place.findOne({ id: req.body.id });
@@ -25,7 +25,7 @@ exports.updatePlace = async (req, res, next) => {
     } else {
         res.status(401).json({ message: "Place could not be found!" });
     };
-}
+};
 
 exports.deletePlace = async (req, res, next) => {
     await Place.deleteOne({ id: req.body.id })
@@ -35,4 +35,4 @@ exports.deletePlace = async (req, res, next) => {
         .catch(err => {
             res.status(401).json({ message: "Place could not be found!" });
         })
-}
+};

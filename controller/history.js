@@ -43,3 +43,13 @@ exports.updateHistory = async (req, res, next) => {
         res.status(401).json({ message: "Could not be found!" });
     };
 };
+
+exports.deleteHistory = async (req, res, next) => {
+    const history = await History.findOne({ SID: req.body.SID });
+    if (history) {
+        await History.deleteOne({ _id: history._id });
+        return res.status(200).json({ message: "History deleted!" });
+    } else {
+        return res.status(401).json({ message: "History not found!" });
+    }
+};
