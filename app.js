@@ -12,8 +12,9 @@ const bookRoutes = require('./routes/book');
 
 const app = express();
 dotenv.config({ path: './.env' });
+
 mongoose.connect(
-  process.env.MONGO_URI,
+  process.env.MONGOOSE_URL,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }
 )
   .then(() => { console.log('Connected to database!') })
