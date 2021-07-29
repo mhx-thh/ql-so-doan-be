@@ -7,7 +7,7 @@ router.post('/signup', UserController.createUser);
 
 router.post('/login', UserController.userLogin);
 
-router.post('/updateCustomer', UserController.updateCustomer);
+router.post('/updateUser', UserController.updateUser);
 
 router.post('/checkExistUser', UserController.checkExistUser);
 

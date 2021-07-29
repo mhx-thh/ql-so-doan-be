@@ -20,30 +20,28 @@ exports.sendMail = (req, res, next) => {
     service: 'gmail',
     host: 'smtp.gmail.com',
     auth: {
-      user: 'nguyentanvinh2911@gmail.com',
-      pass: ''
+      user: process.env.GMAIL_EMAIL,
+      pass: process.env.GMAIL_PASSWORD
     }
   }));
 
-  readHTMLFile('backend/models/email.html', function (err, html) {
+  readHTMLFile(process.env.LINK_HTML, function (err, html) {
     var template = handlebars.compile(html);
-    var replacements = {
-      username: req.body.username
-    };
+    var replacements = req.body
     var htmlToSend = template(replacements);
     var mailOptions = {
-      from: 'nguyentanvinh2911@gmail.com',
-      to: 'nguyentanvinh29112000@gmail.com',
-      subject: 'test subject',
+      from: process.env.GMAIL_EMAIL,
+      to: req.body.email,
+      subject: req.body.subject,
       html: htmlToSend
     };
     transporter.sendMail(mailOptions, function (error, response) {
       if (error) {
         console.log(error);
-        res.status(404).json({ "message": "Sent mail failed!" });
+        return res.status(404).json({ "message": "Sent mail failed!" });
       } else {
         console.log('Email sent: ' + response.response);
-        res.status(200).json({ "message": "Sent mail successfull!" });
+        return res.status(200).json({ "message": "Sent mail successfull!" });
       }
     });
   })
