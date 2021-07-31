@@ -19,7 +19,7 @@ exports.approvalBook = async (req, res, next) => {
     const book = await Book.findByIdAndUpdate({ _id: req.query.id }, { $set: { Approval: 'Đã duyệt' } });
     if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
     book.save();
-    //TODO: Còn lỗi
+    //TODO: Chưa gửi mail
     //sendMailController.sendMail(req, res, next); 
     return sendResponse(book, StatusCodes.OK, res);
 };

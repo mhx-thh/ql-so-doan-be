@@ -21,7 +21,7 @@ exports.createOne = (Model) => async (req, res, next) => {
             sendResponse(result, StatusCodes.CREATED, res);
         })
         .catch(err => {
-            return next(new AppError('Can not create!', 400));
+            return next(new AppError(err, 400));
         });
 };
 
