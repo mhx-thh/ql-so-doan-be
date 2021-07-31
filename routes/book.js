@@ -8,8 +8,8 @@ router.get('/getAll/', BookController.getAllBook);
 router.get('/getBook/', BookController.getBook);
 router.get('/getApproval/', BookController.getApproval);
 router.post('/addBook/', BookController.createBook);
-router.put('/update', BookController.updateBook);
-router.delete('/deleteBook', BookController.deleteBook);
+router.put('/update/:id', BookController.updateBook); //add param
+router.delete('/deleteBook/:id', BookController.deleteBook); //add param
 router.put('/approvalBook', BookController.approvalBook);
 
 module.exports = router;
