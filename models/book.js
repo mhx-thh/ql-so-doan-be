@@ -30,7 +30,9 @@ const bookSchema = mongoose.Schema({
     //SDT
     Phone: {
         type: String,
-        require: true
+        require: true,
+        maxlength: 10,
+        minlength: 10
     },
     //CMND
     IC: {
