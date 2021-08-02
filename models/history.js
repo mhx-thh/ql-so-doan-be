@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const historyShema = mongoose.Schema({
+const historySchema = mongoose.Schema({
     //MSSV
     SID: {
         type: String,
