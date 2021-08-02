@@ -9,6 +9,8 @@ const sendMailRoutes = require('./routes/sendMail');
 const classRoutes = require('./routes/class');
 const faculityRoutes = require('./routes/faculity');
 const bookRoutes = require('./routes/book');
+const approvedRoutes = require('./routes/approved_books');
+const yearRoutes = require('./routes/school_years');
 
 const app = express();
 dotenv.config({ path: './.env' });
@@ -45,6 +47,8 @@ app.use('/api/pay', payRoutes);
 app.use('/api/sendMail', sendMailRoutes);
 app.use('/api/class', classRoutes);
 app.use('/api/faculity', faculityRoutes);
-app.use('/api/book', bookRoutes)
+app.use('/api/book', bookRoutes);
+app.use('/api/approved', approvedRoutes);
+app.use('/api/year', yearRoutes);
 
 module.exports = app;
