@@ -23,7 +23,7 @@ const bookSchema = mongoose.Schema({
         required: true
     },
     //Khoa
-    Faculity: {
+    Faculty: {
         type: String,
         required: true
     },

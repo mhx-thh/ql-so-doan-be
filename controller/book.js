@@ -1,4 +1,5 @@
 const Book = require("../models/book");
+const History = require("../models/history");
 const handler = require('../utils/handlerFactory');
 const sendResponse = require('../utils/sendResponse');
 const sendMailController = require('./sendMail');
@@ -19,8 +20,7 @@ exports.approvalBook = async (req, res, next) => {
     const book = await Book.findByIdAndUpdate({ _id: req.query.id }, { $set: { Approval: 'Đã duyệt' } });
     if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
     book.save();
-    //TODO: Chưa gửi mail
-    //sendMailController.sendMail(req, res, next); 
+    sendMailController.sendMail(req, res);
     return sendResponse(book, StatusCodes.OK, res);
 };
 //Tìm trạng thái đã duyệt theo ObjectID
@@ -29,6 +29,18 @@ exports.getApproval = async (req, res, next) => {
     if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
     return sendResponse(book.Approval, StatusCodes.OK, res);
 };
+//Tình trạng duyệt theo khoa
+exports.ApprovedByFaculty = async (req, res, next) => {
+    const approvedBooks = await Book.find({ Faculty: req.query.Faculty, Approval: 'Đã duyệt' })
+    const PendingBooks = await Book.find({ Faculty: req.query.Faculty, Approval: 'Đang chờ duyệt' })
+    res.status(200).json({
+        Approval: approvedBooks.length,
+        Pending: PendingBooks.length
+    });
+};
+//Đã duyệt của khoa theo năm
+
+
 // exports.updateApproval = async (req, res, next) => {
 //   let book = await Book.findOne({ SID: req.body.SID });
 //   if (book) {
