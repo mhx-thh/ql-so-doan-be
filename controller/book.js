@@ -20,8 +20,7 @@ exports.approvalBook = async (req, res, next) => {
     const book = await Book.findByIdAndUpdate({ _id: req.query.id }, { $set: { Approval: 'Đã duyệt' } });
     if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
     book.save();
-    sendMailController.sendMail(req, res);
-    return sendResponse(book, StatusCodes.OK, res);
+    return sendMailController.sendMail(req, res);
 };
 //Tìm trạng thái đã duyệt theo ObjectID
 exports.getApproval = async (req, res, next) => {
@@ -45,7 +44,6 @@ exports.ApprovedByYear = async (req, res, next) => {
     for (let i = 0; i < approvedBook.length; i++) {
         book[i] = await Book.find({ Faculty: req.query.Faculty, SID: approvedBook[i].SID });
     }
-    // res.send(book);
     res.status(200).json(
         { Approved: book.length }
     );
