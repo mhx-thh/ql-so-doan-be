@@ -1,5 +1,5 @@
 const Book = require("../models/book");
-const History = require("../models/history");
+const ApprovedBooks = require("../models/approved_books");
 const handler = require('../utils/handlerFactory');
 const sendResponse = require('../utils/sendResponse');
 const sendMailController = require('./sendMail');
@@ -34,12 +34,22 @@ exports.ApprovedByFaculty = async (req, res, next) => {
     const approvedBooks = await Book.find({ Faculty: req.query.Faculty, Approval: 'Đã duyệt' })
     const PendingBooks = await Book.find({ Faculty: req.query.Faculty, Approval: 'Đang chờ duyệt' })
     res.status(200).json({
-        Approval: approvedBooks.length,
+        Approved: approvedBooks.length,
         Pending: PendingBooks.length
     });
 };
 //Đã duyệt của khoa theo năm
-
+exports.ApprovedByYear = async (req, res, next) => {
+    const approvedBook = await ApprovedBooks.find({ Year: req.query.Year });
+    let book = [];
+    for (let i = 0; i < approvedBook.length; i++) {
+        book[i] = await Book.find({ Faculty: req.query.Faculty, SID: approvedBook[i].SID });
+    }
+    // res.send(book);
+    res.status(200).json(
+        { Approved: book.length }
+    );
+};
 
 // exports.updateApproval = async (req, res, next) => {
 //   let book = await Book.findOne({ SID: req.body.SID });

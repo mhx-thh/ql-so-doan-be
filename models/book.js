@@ -27,6 +27,10 @@ const bookSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    Class: {
+        type: String,
+        required: true
+    },
     //SDT
     Phone: {
         type: String,
@@ -64,10 +68,10 @@ const bookSchema = mongoose.Schema({
         type: String,
         default: null
     },
-    //Trạng thái
-    Status: {
-        type: String
-    },
+    // //Trạng thái
+    // Status: {
+    //     type: String
+    // },
     //Duyệt
     Approval: {
         type: String,
