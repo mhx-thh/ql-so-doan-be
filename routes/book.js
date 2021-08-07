@@ -16,7 +16,7 @@ router.put('/update/:id', BookController.updateBookById);
 //delete book (student ID)
 router.delete('/delete/:id', BookController.deleteBookById);
 //change approval (student ID)
-router.put('/approval/update/:id', BookController.approvalBookById);
+router.put('/approval/:id', BookController.approvalBookById);
 //get approved by faculty
 router.get('/approval/faculty', BookController.ApprovedByFaculty);
 //get approved by faculty in year

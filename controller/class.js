@@ -6,7 +6,7 @@ const AppError = require('../utils/appError');
 
 exports.getClassByNameOfFaculty = async (req, res, next) => {
 
-  let faculty = await faculites.findOne({ name: req.params.facultyName });
+  let faculty = await faculites.findOne({ id: req.params.id });
   if (!faculty) {
     return res.status(500).json({
       message: "Getting class by name of faculty failed!"
