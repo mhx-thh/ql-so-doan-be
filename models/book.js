@@ -18,7 +18,7 @@ const bookSchema = mongoose.Schema({
         required: true
     },
     //Chi đoàn
-    YB: {
+    Class: {
         type: String,
         required: true
     },
@@ -27,16 +27,10 @@ const bookSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    Class: {
-        type: String,
-        required: true
-    },
     //SDT
     Phone: {
         type: String,
-        require: true,
-        maxlength: 10,
-        minlength: 10
+        require: true
     },
     //CMND
     IC: {
@@ -76,7 +70,7 @@ const bookSchema = mongoose.Schema({
     //Duyệt
     Approval: {
         type: String,
-        default: 'Đang chờ duyệt'
+        default: null
     }
 });
 

@@ -18,7 +18,35 @@ exports.getBookById = async (req, res, next) => {
         })
 };
 //Tạo sổ đoàn
-exports.createBook = handler.createOne(Book);
+exports.createBook = async (req, res, next) => {
+    const book = new Book({
+      SID: req.body.SID,
+      Name: req.body.Name,
+      DOB: req.body.DOB,
+      Class: req.body.YB,
+      Faculty: req.body.Faculity,
+      Phone: req.body.Phone,
+      IC: req.body.IC,
+      DJU: req.body.DJU,
+      DJCP: req.body.DJCP,
+      PositionHSU: req.body.PositionHSU,
+      ClassOfficePosition: req.body.ClassOfficePosition,
+      Talent: req.body.Talent,
+      Approval: null
+    });
+    book.save()
+      .then(
+        res.status(201).json({
+          message: "Book created!"
+        })
+      )
+      .catch(err => {
+        res.status(400).json({
+          message: err.message
+        })
+      });
+  };
+  
 //Cập nhật theo MSSV
 exports.updateBookById = async (req, res, next) => {
     const book = await Book.findOneAndUpdate({ SID: req.params.id }, req.body, {

@@ -9,7 +9,7 @@ router.get('', BookController.getAllBook);
 router.get('/:id', BookController.getBookById);
 //get approval by student ID
 router.get('/approval/:id', BookController.getApprovalById);
-//add one book to database
+//add one book to database - used
 router.post('/create', BookController.createBook);
 //update book (student ID)
 router.put('/update/:id', BookController.updateBookById);
