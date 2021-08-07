@@ -11,10 +11,20 @@ exports.getListNameFaculties = (req, res, next) => {
     if (!err) res.status(200).json(txs);
     else
       res.status(500).json({
-        message: "Adding faculty failed!"
-      })
+        message: "Get faculty failed!"
+      });
+  });
+};
+
+exports.getFaculty = async (req, res, next) => {
+  faculty.find({ id: req.params.id }, '-_id __v0 name id', (err, result) => {
+    if (!err) res.status(200).json(result);
+    else
+      res.status(404).json({
+        message: err.message
+      });
   })
-}
+};
 
 exports.addfaculty = handler.createOne(faculty);
 

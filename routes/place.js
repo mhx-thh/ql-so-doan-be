@@ -8,7 +8,7 @@ router.get('', PlaceController.getAll);
 //get place by id (req.body)
 router.get('/get', PlaceController.getPlace);
 //add place
-router.post('/add', PlaceController.createPlace);
+router.post('/create', PlaceController.createPlace);
 //update place by id (req.body)
 router.put('/update', PlaceController.updatePlace);
 //delete place by id (req.body)

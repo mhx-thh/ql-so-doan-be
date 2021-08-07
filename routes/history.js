@@ -3,7 +3,7 @@ const router = express.Router();
 const historyController = require('../controller/history');
 
 router.get('', historyController.getHistoryById);
-router.post('/add', historyController.createHistory);
+router.post('/create', historyController.createHistory);
 router.put('/update', historyController.updateHistoryById);
 router.delete('/delete', historyController.deleteHistoryById);
 
