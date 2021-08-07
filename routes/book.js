@@ -4,7 +4,7 @@ const router = express.Router();
 const BookController = require('../controller/book');
 
 //get all books
-router.get('/getAll/', BookController.getAllBook);
+router.get('', BookController.getAllBook);
 //get one book by ObjectID
 router.get('/getBook/', BookController.getBook);
 //get one book by student ID

@@ -4,7 +4,7 @@ const router = express.Router();
 const PlaceController = require('../controller/place');
 
 //get all places 
-router.get('/getAll', PlaceController.getAll);
+router.get('', PlaceController.getAll);
 //get place by id (req.body)
 router.get('/get', PlaceController.getPlace);
 //add place
