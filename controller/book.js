@@ -71,7 +71,13 @@ exports.ApprovedByYear = async (req, res, next) => {
         { Approved: book.length }
     );
 };
-
+//Hủy đoàn viên
+exports.RemoveYouth = async (req, res, next) => {
+    const book = await Book.findOneAndUpdate({ SID: req.params.id }, { $set: { Status: 'Đã hủy' } });
+    if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
+    book.save();
+    return sendResponse(book, StatusCodes.OK, res);
+};
 //Tìm theo ObjectID
 // exports.getBook = handler.getOne(Book);
 //Cập nhật theo ObjectID

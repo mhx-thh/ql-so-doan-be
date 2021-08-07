@@ -21,5 +21,7 @@ router.put('/approval/:id', BookController.approvalBookById);
 router.get('/approval/faculty', BookController.ApprovedByFaculty);
 //get approved by faculty in year
 router.get('/approval/year', BookController.ApprovedByYear);
+//Hủy đoàn viên
+router.put('/:id', BookController.RemoveYouth);
 
 module.exports = router;
