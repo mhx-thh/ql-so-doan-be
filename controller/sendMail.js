@@ -3,7 +3,6 @@ const smtpTransport = require('nodemailer-smtp-transport');
 const handlebars = require('handlebars');
 const fs = require('fs');
 const pdf = require('html-pdf');
-const sendResponse = require('../utils/sendResponse');
 const AppError = require('../utils/appError');
 
 exports.sendMail = (req, res, next) => {
@@ -52,9 +51,11 @@ exports.sendMail = (req, res, next) => {
       transporter.sendMail(mailOptions, function (error, response) {
         if (error) {
           console.log(error);
+          transporter.close();
           return res.status(404).json({ "message": "Sent mail failed!" });
         } else {
           console.log('Email sent: ' + response.response);
+          transporter.close();
           return res.status(200).json({ "message": "Sent mail successfull!" });
         }
       });

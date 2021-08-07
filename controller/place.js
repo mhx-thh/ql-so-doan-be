@@ -4,7 +4,7 @@ const handler = require('../utils/handlerFactory');
 exports.getAll = handler.getAll(Place);
 
 exports.getPlace = async (req, res, next) => {
-    await Place.findOne({ id: req.body.id })
+    await Place.findOne({ id: req.params.id })
         .then(result => {
             sendResponse(result, StatusCodes.OK, res);
         })
@@ -20,7 +20,7 @@ exports.createPlace = handler.createOne(Place);
 // exports.deletePlace = handler.deleteOne(Place);
 
 exports.updatePlace = async (req, res, next) => {
-    const place = await Place.findOne({ id: req.body.id });
+    const place = await Place.findOne({ id: req.params.id });
     if (place) {
         await Place.updateOne({ id: place.id }, {
             name: req.body.name
@@ -33,7 +33,7 @@ exports.updatePlace = async (req, res, next) => {
 };
 
 exports.deletePlace = async (req, res, next) => {
-    await Place.deleteOne({ id: req.body.id })
+    await Place.deleteOne({ id: req.params.id })
         .then(result => {
             res.status(200).json({ message: "Place deleted!" });
         })

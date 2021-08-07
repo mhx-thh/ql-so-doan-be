@@ -3,9 +3,10 @@ const router = express.Router();
 
 const facultyController = require('../controller/faculty');
 
-router.post('/addfaculty', facultyController.addfaculty);
-router.get('/listNamefaculty', facultyController.getListNameFaculties);
-router.put('/updatefaculty/:id', facultyController.updatefaculty);
-router.delete('/deletefaculty/:id', facultyController.deletefaculty);
+router.get('', facultyController.getListNameFaculties);
+router.get('/:id', facultyController.getFaculty);
+router.post('/create', facultyController.addfaculty);
+router.put('/update/:id', facultyController.updatefaculty);
+router.delete('/delete/:id', facultyController.deletefaculty);
 
 module.exports = router;

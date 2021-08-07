@@ -9,8 +9,10 @@ exports.updateHistory = handler.updateOne(History);
 
 exports.deleteHistory = handler.deleteOne(History);
 
+exports.getAll = handler.getAll(History);
+
 exports.getHistoryById = async (req, res, next) => {
-    await History.findOne({ SID: req.body.SID })
+    await History.findOne({ SID: req.params.id })
         .then(result => {
             res.status(200)
                 .json({
@@ -25,7 +27,7 @@ exports.getHistoryById = async (req, res, next) => {
 };
 
 exports.updateHistoryById = async (req, res, next) => {
-    const history = await History.findOne({ SID: req.body.SID });
+    const history = await History.findOne({ SID: req.params.id });
     if (history) {
         await History.updateOne({ _id: history._id }, {
             $set: {
@@ -41,7 +43,7 @@ exports.updateHistoryById = async (req, res, next) => {
 };
 
 exports.deleteHistoryById = async (req, res, next) => {
-    const history = await History.findOne({ SID: req.body.SID });
+    const history = await History.findOne({ SID: req.params.id });
     if (history) {
         await History.deleteOne({ _id: history._id });
         return res.status(200).json({ message: "History deleted!" });

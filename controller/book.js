@@ -7,11 +7,9 @@ const StatusCodes = require('http-status-codes');
 const AppError = require('../utils/appError');
 //Tìm hết sỗ đoàn
 exports.getAllBook = handler.getAll(Book);
-//Tìm theo ObjectID
-exports.getBook = handler.getOne(Book);
 //Tìm theo MSSV
 exports.getBookById = async (req, res, next) => {
-    await Book.findOne({ SID: req.body.SID })
+    await Book.findOne({ SID: req.params.id })
         .then(result => {
             sendResponse(result, StatusCodes.OK, res);
         })
@@ -21,27 +19,18 @@ exports.getBookById = async (req, res, next) => {
 };
 //Tạo sổ đoàn
 exports.createBook = handler.createOne(Book);
-//Cập nhật theo ObjectID
-exports.updateBook = handler.updateOne(Book);
 //Cập nhật theo MSSV
 exports.updateBookById = async (req, res, next) => {
-    let book = await Book.findOne({ SID: req.body.SID });
-    if (book) {
-        await Book.updateOne({ _id: book._id }, req.body, {
-            new: true,
-            runValidators: true
-        });
-        await book.save();
-        return sendResponse(book, StatusCodes.OK, res);
-    } else {
-        return next(new AppError('No document found!', StatusCodes.NOT_FOUND));
-    };
+    const book = await Book.findOneAndUpdate({ SID: req.params.id }, req.body, {
+        new: true,
+        runValidators: true
+    });
+    if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
+    return sendResponse(book, StatusCodes.OK, res);
 };
-//Xóa theo ObjectID
-exports.deleteBook = handler.deleteOne(Book);
 //Xóa theo MSSV
 exports.deleteBookById = async (req, res, next) => {
-    const book = await Book.findOne({ SID: req.body.SID });
+    const book = await Book.findOne({ SID: req.params.id });
     if (book) {
         await Book.deleteOne({ _id: book._id });
         return sendResponse('success', StatusCodes.NO_CONTENT, res);
@@ -49,29 +38,16 @@ exports.deleteBookById = async (req, res, next) => {
         return next(new AppError('No document found!', StatusCodes.NOT_FOUND));
     }
 };
-//Chuyển trạng thái duyệt sang đã duyệt
-exports.approvalBook = async (req, res, next) => {
-    const book = await Book.findByIdAndUpdate({ _id: req.query.id }, { $set: { Approval: 'Đã duyệt' } });
-    if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
-    book.save();
-    return sendMailController.sendMail(req, res);
-};
 //Chuyển trạng thái duyệt sang đã duyệt bằng MSSV
 exports.approvalBookById = async (req, res, next) => {
-    const book = await Book.findOneAndUpdate({ SID: req.body.SID }, { $set: { Approval: 'Đã duyệt' } });
+    const book = await Book.findOneAndUpdate({ SID: req.params.id }, { $set: { Approval: 'Đã duyệt' } });
     if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
     book.save();
     return sendMailController.sendMail(req, res);
-};
-//Tìm trạng thái đã duyệt theo ObjectID
-exports.getApproval = async (req, res, next) => {
-    const book = await Book.findById({ _id: req.query.id });
-    if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
-    return sendResponse(book.Approval, StatusCodes.OK, res);
 };
 //Tìm trạng thái đã duyệt theo MSSV
 exports.getApprovalById = async (req, res, next) => {
-    const book = await Book.findOne({ SID: req.body.SID });
+    const book = await Book.findOne({ SID: req.params.id });
     if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
     return sendResponse(book.Approval, StatusCodes.OK, res);
 };
@@ -95,3 +71,29 @@ exports.ApprovedByYear = async (req, res, next) => {
         { Approved: book.length }
     );
 };
+//Hủy đoàn viên
+exports.RemoveYouth = async (req, res, next) => {
+    const book = await Book.findOneAndUpdate({ SID: req.params.id }, { $set: { Status: 'Đã hủy' } });
+    if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
+    book.save();
+    return sendResponse(book, StatusCodes.OK, res);
+};
+//Tìm theo ObjectID
+// exports.getBook = handler.getOne(Book);
+//Cập nhật theo ObjectID
+// exports.updateBook = handler.updateOne(Book);
+//Xóa theo ObjectID
+// exports.deleteBook = handler.deleteOne(Book);
+//Chuyển trạng thái duyệt sang đã duyệt
+// exports.approvalBook = async (req, res, next) => {
+//     const book = await Book.findByIdAndUpdate({ _id: req.query.id }, { $set: { Approval: 'Đã duyệt' } });
+//     if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
+//     book.save();
+//     return sendMailController.sendMail(req, res);
+// };
+//Tìm trạng thái đã duyệt theo ObjectID
+// exports.getApproval = async (req, res, next) => {
+//     const book = await Book.findById({ _id: req.query.id });
+//     if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
+//     return sendResponse(book.Approval, StatusCodes.OK, res);
+// };

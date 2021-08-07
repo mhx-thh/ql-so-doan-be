@@ -69,9 +69,10 @@ const bookSchema = mongoose.Schema({
         default: null
     },
     // //Trạng thái
-    // Status: {
-    //     type: String
-    // },
+    Status: {
+        type: String,
+        default: null
+    },
     //Duyệt
     Approval: {
         type: String,
