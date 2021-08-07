@@ -11,11 +11,11 @@ exports.createPost = (req, res, next) => {
       postId: createdPost.id
     });
   })
-  .catch(error => {
-    res.status(500).json({
-      message: "Creating a post failed!"
-    })
-  });
+    .catch(error => {
+      res.status(500).json({
+        message: "Creating a post failed!"
+      })
+    });
 }
 
 exports.updatePost = (req, res, next) => {
@@ -25,19 +25,19 @@ exports.updatePost = (req, res, next) => {
     content: req.body.content
   })
   Post.updateOne({ _id: req.params.id }, post)
-  .then((result) => {
-    if(result.n > 0) {
-      res.status(200).json({ message: 'Update successful!' });
-    } else {
-      res.status(401).json({message: "Not authorized!"});
-    }
+    .then((result) => {
+      if (result.n > 0) {
+        res.status(200).json({ message: 'Update successful!' });
+      } else {
+        res.status(401).json({ message: "Not authorized!" });
+      }
 
-  })
-  .catch(error => {
-    res.status(500).json({
-      message: "Couldn't update post!"
     })
-  })
+    .catch(error => {
+      res.status(500).json({
+        message: "Couldn't update post!"
+      })
+    })
 }
 
 exports.getPosts = (req, res, next) => {

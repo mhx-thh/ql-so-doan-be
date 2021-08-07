@@ -3,7 +3,7 @@ const router = express.Router();
 
 const ClassController = require('../controller/class');
 
-router.get('/getClass/:faculityName', ClassController.getClassByNameOfFaculity);
+router.get('/getClass/:facultyName', ClassController.getClassByNameOfFaculty);
 router.get('/getAll', ClassController.getAllClass);
 router.post('/createClass', ClassController.createClass);
 router.put('/updateClass/:id', ClassController.updateClassById);
