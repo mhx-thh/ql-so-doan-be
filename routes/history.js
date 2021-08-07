@@ -4,7 +4,7 @@ const historyController = require('../controller/history');
 
 router.get('', historyController.getHistoryById);
 router.post('/create', historyController.createHistory);
-router.put('/update', historyController.updateHistoryById);
-router.delete('/delete', historyController.deleteHistoryById);
+router.put('/update/:id', historyController.updateHistoryById);
+router.delete('/delete/:id', historyController.deleteHistoryById);
 
 module.exports = router;

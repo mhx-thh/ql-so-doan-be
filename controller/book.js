@@ -21,17 +21,12 @@ exports.getBookById = async (req, res, next) => {
 exports.createBook = handler.createOne(Book);
 //Cập nhật theo MSSV
 exports.updateBookById = async (req, res, next) => {
-    let book = await Book.findOne({ SID: req.params.id });
-    if (book) {
-        await Book.updateOne({ _id: book._id }, req.body, {
-            new: true,
-            runValidators: true
-        });
-        await book.save();
-        return sendResponse(book, StatusCodes.OK, res);
-    } else {
-        return next(new AppError('No document found!', StatusCodes.NOT_FOUND));
-    };
+    const book = await Book.findOneAndUpdate({ SID: req.params.id }, req.body, {
+        new: true,
+        runValidators: true
+    });
+    if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
+    return sendResponse(book, StatusCodes.OK, res);
 };
 //Xóa theo MSSV
 exports.deleteBookById = async (req, res, next) => {

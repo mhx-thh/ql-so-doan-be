@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const ApprovedSchema = mongoose.Schema({
     SID: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     Approval: {
         type: String,

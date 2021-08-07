@@ -18,8 +18,8 @@ router.delete('/delete/:id', BookController.deleteBookById);
 //change approval (student ID)
 router.put('/approval/update/:id', BookController.approvalBookById);
 //get approved by faculty
-router.get('/ApprovedByFaculty', BookController.ApprovedByFaculty);
+router.get('/approval/faculty', BookController.ApprovedByFaculty);
 //get approved by faculty in year
-router.get('/ApprovedByYear', BookController.ApprovedByYear);
+router.get('/approval/year', BookController.ApprovedByYear);
 
 module.exports = router;
