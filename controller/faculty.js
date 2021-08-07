@@ -6,7 +6,6 @@ const AppError = require('../utils/appError');
 
 
 exports.getListNameFaculties = (req, res, next) => {
-
   faculty.find({}, '-_id __v0 name id', (err, txs) => {
     if (!err) res.status(200).json(txs);
     else
