@@ -11,6 +11,10 @@ const bookSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    Gender: {
+        type: String,
+        required: true
+    },
     //Ngày sinh
     DOB: {
         type: Date,

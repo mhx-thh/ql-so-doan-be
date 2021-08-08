@@ -22,6 +22,7 @@ exports.createBook = async (req, res, next) => {
     const book = new Book({
       SID: req.body.SID,
       Name: req.body.Name,
+      Gender: req.body.Gender,
       DOB: req.body.DOB,
       Class: req.body.YB,
       Faculty: req.body.Faculity,
