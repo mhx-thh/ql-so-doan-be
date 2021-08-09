@@ -12,6 +12,8 @@ const bookRoutes = require('./routes/book');
 const approvedRoutes = require('./routes/approved_books');
 const yearRoutes = require('./routes/school_years');
 const notificationRoutes = require('./routes/notification');
+const historyRoutes = require('./routes/history');
+const placeRoutes = require('./routes/place');
 
 const app = express();
 dotenv.config({ path: './.env' });
@@ -52,5 +54,7 @@ app.use('/api/book', bookRoutes);
 app.use('/api/approved', approvedRoutes);
 app.use('/api/year', yearRoutes);
 app.use('/api/notification', notificationRoutes);
+app.use('/api/history', historyRoutes);
+app.use('/api/place', placeRoutes);
 
 module.exports = app;
