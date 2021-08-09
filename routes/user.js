@@ -9,6 +9,6 @@ router.post('/login', UserController.userLogin);
 
 router.put('/updateUser', UserController.updateUser);
 
-router.post('/checkExistUser', UserController.checkExistUser);
+router.get('/checkExistUser', UserController.checkExistUser);
 
 module.exports = router;
