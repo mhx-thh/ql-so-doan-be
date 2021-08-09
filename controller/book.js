@@ -21,7 +21,7 @@ exports.getBookById = async (req, res, next) => {
 exports.getBookNotApproval = async (req, res, next) => {
     await Book.find({ Approval: null })
         .then(result => {
-            sendResponse(result, StatusCodes.OK, res);
+            res.status(201).json(result);
         })
         .catch(err => {
             return next(new AppError('No document found!', StatusCodes.NOT_FOUND));
