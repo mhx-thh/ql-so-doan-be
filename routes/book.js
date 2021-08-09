@@ -6,7 +6,7 @@ const BookController = require('../controller/book');
 //get all books
 router.get('', BookController.getAllBook);
 //get one book by student ID
-router.get('/:id', BookController.getBookById);
+router.get('/getBook/:id', BookController.getBookById);
 //get approval by student ID
 router.get('/approval/:id', BookController.getApprovalById);
 //add one book to database - used
@@ -25,5 +25,4 @@ router.get('/approval/year', BookController.ApprovedByYear);
 router.put('/:id', BookController.RemoveYouth);
 //danh sách sổ chưa được duyệt
 router.get('/notApproval', BookController.getBookNotApproval);
-
 module.exports = router;

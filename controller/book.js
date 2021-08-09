@@ -19,48 +19,45 @@ exports.getBookById = async (req, res, next) => {
 };
 //Tìm theo trạng thái (chưa duyệt)
 exports.getBookNotApproval = async (req, res, next) => {
-    console.log(123);
     await Book.find({ Approval: null })
         .then(result => {
-            res.status(200).json(
-                result
-            );
+            sendResponse(result, StatusCodes.OK, res);
         })
         .catch(err => {
             return next(new AppError('No document found!', StatusCodes.NOT_FOUND));
-        })
+        });
 };
 //Tạo sổ đoàn
 exports.createBook = async (req, res, next) => {
     const book = new Book({
-      SID: req.body.SID,
-      Name: req.body.Name,
-      Gender: req.body.Gender,
-      DOB: req.body.DOB,
-      Class: req.body.YB,
-      Faculty: req.body.Faculity,
-      Phone: req.body.Phone,
-      IC: req.body.IC,
-      DJU: req.body.DJU,
-      DJCP: req.body.DJCP,
-      PositionHSU: req.body.PositionHSU,
-      ClassOfficePosition: req.body.ClassOfficePosition,
-      Talent: req.body.Talent,
-      Approval: null
+        SID: req.body.SID,
+        Name: req.body.Name,
+        Gender: req.body.Gender,
+        DOB: req.body.DOB,
+        Class: req.body.YB,
+        Faculty: req.body.Faculity,
+        Phone: req.body.Phone,
+        IC: req.body.IC,
+        DJU: req.body.DJU,
+        DJCP: req.body.DJCP,
+        PositionHSU: req.body.PositionHSU,
+        ClassOfficePosition: req.body.ClassOfficePosition,
+        Talent: req.body.Talent,
+        Approval: null
     });
     book.save()
-      .then(
-        res.status(201).json({
-          message: "Book created!"
-        })
-      )
-      .catch(err => {
-        res.status(400).json({
-          message: err.message
-        })
-      });
-  };
-  
+        .then(
+            res.status(201).json({
+                message: "Book created!"
+            })
+        )
+        .catch(err => {
+            res.status(400).json({
+                message: err.message
+            })
+        });
+};
+
 //Cập nhật theo MSSV
 exports.updateBookById = async (req, res, next) => {
     const book = await Book.findOneAndUpdate({ SID: req.params.id }, req.body, {
