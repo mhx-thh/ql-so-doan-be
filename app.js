@@ -14,6 +14,8 @@ const yearRoutes = require('./routes/school_years');
 const notificationRoutes = require('./routes/notification');
 const historyRoutes = require('./routes/history');
 const placeRoutes = require('./routes/place');
+const errorHandler = require('./utils/errorHandler');
+const AppError = require('./utils/appError');
 
 const app = express();
 dotenv.config({ path: './.env' });
@@ -56,5 +58,9 @@ app.use('/api/year', yearRoutes);
 app.use('/api/notification', notificationRoutes);
 app.use('/api/history', historyRoutes);
 app.use('/api/place', placeRoutes);
+app.all('*', (request, response, next) => {
+  next(new AppError(`Can't find ${request.originalUrl} on this server!`, 404));
+});
+app.use(errorHandler);
 
 module.exports = app;

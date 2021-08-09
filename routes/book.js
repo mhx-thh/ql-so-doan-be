@@ -5,8 +5,10 @@ const BookController = require('../controller/book');
 
 //get all books
 router.get('', BookController.getAllBook);
+//danh sách sổ chưa được duyệt
+router.get('/notApproval', BookController.getBookNotApproval);
 //get one book by student ID
-router.get('/getBook/:id', BookController.getBookById);
+router.get('/:id', BookController.getBookById);
 //get approval by student ID
 router.get('/approval/:id', BookController.getApprovalById);
 //add one book to database - used
@@ -23,6 +25,4 @@ router.get('/approval/faculty', BookController.ApprovedByFaculty);
 router.get('/approval/year', BookController.ApprovedByYear);
 //Hủy đoàn viên
 router.put('/:id', BookController.RemoveYouth);
-//danh sách sổ chưa được duyệt
-router.get('/notApproval', BookController.getBookNotApproval);
 module.exports = router;

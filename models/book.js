@@ -21,6 +21,10 @@ const bookSchema = mongoose.Schema({
         default: "2000-1-1",
         required: true
     },
+    Email: {
+        type: String,
+        required: true
+    },
     //Chi đoàn
     Class: {
         type: String,

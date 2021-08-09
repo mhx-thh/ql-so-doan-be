@@ -14,10 +14,9 @@ exports.getOne = (Model) => async (req, res, next) => {
     return sendResponse(document, StatusCodes.OK, res);
 };
 
-exports.createOne = (Model) => async (req, res, next) => {
-    await Model.create(req.body)
+exports.createOne = (Model) => (req, res, next) => {
+    Model.create(req.body)
         .then(result => {
-
             sendResponse(result, StatusCodes.CREATED, res);
         })
         .catch(err => {
