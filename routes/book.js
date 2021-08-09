@@ -23,5 +23,7 @@ router.get('/approval/faculty', BookController.ApprovedByFaculty);
 router.get('/approval/year', BookController.ApprovedByYear);
 //Hủy đoàn viên
 router.put('/:id', BookController.RemoveYouth);
+//danh sách sổ chưa được duyệt
+router.get('/notApproval', BookController.getBookNotApproval);
 
 module.exports = router;

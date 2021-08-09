@@ -17,6 +17,19 @@ exports.getBookById = async (req, res, next) => {
             return next(new AppError('No document found!', StatusCodes.NOT_FOUND));
         })
 };
+//Tìm theo trạng thái (chưa duyệt)
+exports.getBookNotApproval = async (req, res, next) => {
+    console.log(123);
+    await Book.find({ Approval: null })
+        .then(result => {
+            res.status(200).json(
+                result
+            );
+        })
+        .catch(err => {
+            return next(new AppError('No document found!', StatusCodes.NOT_FOUND));
+        })
+};
 //Tạo sổ đoàn
 exports.createBook = async (req, res, next) => {
     const book = new Book({
