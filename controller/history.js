@@ -3,7 +3,18 @@ const handler = require('../utils/handlerFactory');
 
 exports.getHistory = handler.getOne(History);
 
-exports.createHistory = handler.createOne(History);
+// exports.createHistory = handler.createOne(History);
+
+exports.createHistory = async (req, res, next) => {
+    const history = await History.create({
+        SID: req.body.SID,
+        PlaceIDs: req.body.PlaceID,
+        Contents: req.body.Content,
+        Times: Date.now()
+    });
+    await history.save();
+    return res.status(201).json(history);
+};
 
 exports.updateHistory = handler.updateOne(History);
 
@@ -29,12 +40,15 @@ exports.getHistoryById = async (req, res, next) => {
 exports.updateHistoryById = async (req, res, next) => {
     const history = await History.findOne({ SID: req.params.id });
     if (history) {
-        await History.updateOne({ _id: history._id }, {
-            $set: {
-                PlaceID: req.body.PlaceID,
-                Time: Date.now()
+        await History.updateOne({ _id: history._id },
+            {
+                $push: {
+                    PlaceIDs: req.body.PlaceID,
+                    Contents: req.body.Content,
+                    Times: Date.now(),
+                }
             }
-        });
+        );
         history.save();
         res.status(200).json({ message: "History updated!" });
     } else {

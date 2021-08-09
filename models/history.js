@@ -8,12 +8,17 @@ const historySchema = mongoose.Schema({
     },
     //Mã địa điểm
     PlaceID: {
-        type: String,
+        type: [String],
+        required: true,
+    },
+    //Nội dung chuyển sổ đoàn
+    Content: {
+        type: [String],
         required: true
     },
     //Thời gian sửa chữa lần cuối
     Time: {
-        type: Date,
+        type: [Date],
         required: true,
         default: Date.now()
     }
