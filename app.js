@@ -14,6 +14,7 @@ const yearRoutes = require('./routes/school_years');
 const notificationRoutes = require('./routes/notification');
 const historyRoutes = require('./routes/history');
 const placeRoutes = require('./routes/place');
+const receiptRoutes = require('./routes/receipt')
 const errorHandler = require('./utils/errorHandler');
 const AppError = require('./utils/appError');
 
@@ -58,6 +59,7 @@ app.use('/api/year', yearRoutes);
 app.use('/api/notification', notificationRoutes);
 app.use('/api/history', historyRoutes);
 app.use('/api/place', placeRoutes);
+app.use('/api/receipt', receiptRoutes);
 app.all('*', (request, response, next) => {
   next(new AppError(`Can't find ${request.originalUrl} on this server!`, 404));
 });
