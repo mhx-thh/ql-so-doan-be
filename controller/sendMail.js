@@ -27,7 +27,6 @@ exports.sendMail = async (req, res, next) => {
       content: new Buffer.from(receipt.Data)
     }
   };
-
   transporter.sendMail(mailOptions, function (error, response) {
     if (error) {
       console.log(error);
