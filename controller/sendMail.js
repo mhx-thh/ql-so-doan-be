@@ -6,6 +6,7 @@ const pdf = require('html-pdf');
 const AppError = require('../utils/appError');
 
 exports.sendMail = (req, res, next) => {
+  //console.log(req.body)
   const readHTMLFile = function (path, callback) {
     fs.readFile(path, { encoding: 'utf-8' }, function (err, html) {
       if (err) {

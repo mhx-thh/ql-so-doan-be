@@ -37,6 +37,7 @@ exports.createBook = async (req, res, next) => {
         Class: req.body.YB,
         Faculty: req.body.Faculity,
         Phone: req.body.Phone,
+        Email: req.body.Email,
         IC: req.body.IC,
         DJU: req.body.DJU,
         DJCP: req.body.DJCP,
@@ -80,6 +81,7 @@ exports.deleteBookById = async (req, res, next) => {
 //Chuyển trạng thái duyệt sang đã duyệt bằng MSSV
 exports.approvalBookById = async (req, res, next) => {
     const book = await Book.findOneAndUpdate({ SID: req.params.id }, { $set: { Approval: 'Đã duyệt' } });
+    console.log(book);
     if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
     book.save();
     return sendMailController.sendMail(req, res);

@@ -18,8 +18,8 @@ const bookSchema = mongoose.Schema({
     //Ngày sinh
     DOB: {
         type: Date,
-        default: "2000-1-1",
-        required: true
+        required: true,
+        default: null
     },
     Email: {
         type: String,
