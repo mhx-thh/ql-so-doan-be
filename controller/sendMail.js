@@ -6,7 +6,6 @@ const pdf = require('html-pdf');
 const AppError = require('../utils/appError');
 const Receipt = require("../models/receipt");
 
-
 exports.sendMail = async (req, res, next) => {
   const transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
