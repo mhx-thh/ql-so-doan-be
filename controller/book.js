@@ -35,7 +35,7 @@ exports.createBook = async (req, res, next) => {
         Gender: req.body.Gender,
         DOB: req.body.DOB,
         Class: req.body.YB,
-        Faculty: req.body.Faculity,
+        Faculty: req.body.Faculty,
         Phone: req.body.Phone,
         Email: req.body.Email,
         IC: req.body.IC,
@@ -44,19 +44,9 @@ exports.createBook = async (req, res, next) => {
         PositionHSU: req.body.PositionHSU,
         ClassOfficePosition: req.body.ClassOfficePosition,
         Talent: req.body.Talent,
-        Approval: null
     });
-    book.save()
-        .then(
-            res.status(201).json({
-                message: "Book created!"
-            })
-        )
-        .catch(err => {
-            res.status(400).json({
-                message: err.message
-            })
-        });
+    book.save();
+    return res.status(201).json({ "message": "Book created!" });
 };
 
 //Cập nhật theo MSSV
