@@ -8,9 +8,9 @@ exports.getHistory = handler.getOne(History);
 exports.createHistory = async (req, res, next) => {
     const history = await History.create({
         SID: req.body.SID,
-        PlaceIDs: req.body.PlaceID,
-        Contents: req.body.Content,
-        Times: Date.now()
+        PlaceID: req.body.PlaceID,
+        Content: req.body.Content,
+        Time: Date.now()
     });
     await history.save();
     return res.status(201).json(history);
@@ -23,7 +23,7 @@ exports.deleteHistory = handler.deleteOne(History);
 exports.getAll = handler.getAll(History);
 
 exports.getHistoryById = async (req, res, next) => {
-    await History.findOne({ SID: req.params.id })
+    await History.find({ SID: req.params.id })
         .then(result => {
             res.status(200)
                 .json({
@@ -37,19 +37,15 @@ exports.getHistoryById = async (req, res, next) => {
         });
 };
 
-exports.updateHistoryById = async (req, res, next) => {
+exports.saveHistory = async (req, res, next) => {
     const history = await History.findOne({ SID: req.params.id });
     if (history) {
-        await History.updateOne({ _id: history._id },
-            {
-                $push: {
-                    PlaceIDs: req.body.PlaceID,
-                    Contents: req.body.Content,
-                    Times: Date.now(),
-                }
-            }
-        );
-        history.save();
+        await History.create({
+            SID: history.SID,
+            PlaceID: req.body.PlaceID,
+            Content: req.body.Content,
+            Time: Date.now()
+        });
         res.status(200).json({ message: "History updated!" });
     } else {
         res.status(401).json({ message: "Could not be found!" });
