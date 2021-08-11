@@ -75,9 +75,8 @@ exports.approvalBookById = async (req, res, next) => {
     const book = await Book.findOneAndUpdate({ SID: req.params.id }, { $set: { Approval: 'Đã duyệt' } });
     if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
     book.save();
-    //await receiptController.createOne(req, res);
-    //res.status(201).json({message: "Successfull!"});
-    return sendMailController.sendMail(req, res);
+    await receiptController.createOneNoReturnResponseOK(req, res, next);
+    return sendMailController.sendMail(req, res, next);
 };
 //Tìm trạng thái đã duyệt theo MSSV
 exports.getApprovalById = async (req, res, next) => {
