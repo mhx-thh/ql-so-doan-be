@@ -17,7 +17,7 @@ exports.sendMail = async (req, res, next) => {
   }));
 
   const receipt = await Receipt.findOne({ SID: req.params.id });
-  if (!receipt) return next(new AppError('No document found!', 404));
+  if (!receipt) return res.status(404).json({message: "No receipt found!"});
   const mailOptions = {
     from: process.env.GMAIL_EMAIL,
     to: receipt.Email,

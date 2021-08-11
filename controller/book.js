@@ -5,6 +5,7 @@ const sendResponse = require('../utils/sendResponse');
 const sendMailController = require('./sendMail');
 const StatusCodes = require('http-status-codes');
 const AppError = require('../utils/appError');
+const receiptController = require('./receipt');
 //Tìm hết sỗ đoàn
 exports.getAllBook = handler.getAll(Book);
 //Tìm theo MSSV
@@ -44,6 +45,7 @@ exports.createBook = async (req, res, next) => {
         PositionHSU: req.body.PositionHSU,
         ClassOfficePosition: req.body.ClassOfficePosition,
         Talent: req.body.Talent,
+        Faculty: req.body.Faculity
     });
     book.save();
     return res.status(201).json({ "message": "Book created!" });
@@ -71,9 +73,10 @@ exports.deleteBookById = async (req, res, next) => {
 //Chuyển trạng thái duyệt sang đã duyệt bằng MSSV
 exports.approvalBookById = async (req, res, next) => {
     const book = await Book.findOneAndUpdate({ SID: req.params.id }, { $set: { Approval: 'Đã duyệt' } });
-    console.log(book);
     if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
     book.save();
+    //await receiptController.createOne(req, res);
+    //res.status(201).json({message: "Successfull!"});
     return sendMailController.sendMail(req, res);
 };
 //Tìm trạng thái đã duyệt theo MSSV
