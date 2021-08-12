@@ -5,6 +5,7 @@ const BookController = require('../controller/book');
 
 //get all books
 router.get('', BookController.getAllBook);
+router.get('/approval', BookController.getBookApproval);
 //danh sách sổ chưa được duyệt
 router.get('/notApproval', BookController.getBookNotApproval);
 //get one book by student ID
