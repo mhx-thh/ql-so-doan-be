@@ -5,7 +5,6 @@ const sendResponse = require('../utils/sendResponse');
 const sendMailController = require('./sendMail');
 const StatusCodes = require('http-status-codes');
 const AppError = require('../utils/appError');
-const receiptController = require('./receipt');
 //Tìm hết sỗ đoàn
 exports.getAllBook = handler.getAll(Book);
 //Tìm theo MSSV
@@ -75,7 +74,6 @@ exports.approvalBookById = async (req, res, next) => {
     const book = await Book.findOneAndUpdate({ SID: req.params.id }, { $set: { Approval: 'Đã duyệt' } });
     if (!book) { return next(new AppError('No document found!', StatusCodes.NOT_FOUND)); };
     book.save();
-    await receiptController.createOneNoReturnResponseOK(req, res, next);
     return sendMailController.sendMail(req, res, next);
 };
 //Tìm trạng thái đã duyệt theo MSSV
