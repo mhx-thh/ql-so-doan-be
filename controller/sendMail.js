@@ -19,7 +19,7 @@ exports.sendMail = async (req, res, next) => {
 
   const find = await Receipt.findOne({ SID: req.params.id });
   if (find === null) {
-    await receiptController.createOneNoReturnResponseOK(req, res, next);
+    await receiptController.createOneNoReturnResponse(req, res, next);
   }
   const receipt = await Receipt.findOne({ SID: req.params.id });
   const mailOptions = {

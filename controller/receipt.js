@@ -78,7 +78,7 @@ exports.createOne = async (req, res, next) => {
     })
 };
 
-exports.createOneNoReturnResponseOK = async (req, res, next) => {
+exports.createOneNoReturnResponse = async (req, res, next) => {
     const book = await Book.findOne({ SID: req.params.id })
     if (!book) return next(new AppError('No document found!', 404));
     const email = book.Email;
