@@ -55,7 +55,7 @@ exports.createOne = async (req, res, next) => {
             name: book.Name,
             id: book.SID,
             faculty: book.Faculty,
-            months: `9, 10, 11, 12/${date.getYear() - 100}`,
+            months: `9, 10, 11, 12/${date.getFullYear()}`,
             day: date.getDate(),
             month: date.getMonth() + 1,
             year: date.getFullYear(),
@@ -78,7 +78,7 @@ exports.createOne = async (req, res, next) => {
     })
 };
 
-exports.createOneNoReturnResponseOK = async (req, res, next) => {
+exports.createOneNoReturnResponse = async (req, res, next) => {
     const book = await Book.findOne({ SID: req.params.id })
     if (!book) return next(new AppError('No document found!', 404));
     const email = book.Email;
@@ -91,7 +91,7 @@ exports.createOneNoReturnResponseOK = async (req, res, next) => {
         name: book.Name,
         id: book.SID,
         faculty: book.Faculty,
-        months: `9, 10, 11, 12/${date.getYear() - 100}`,
+        months: `9, 10, 11, 12/${date.getFullYear()}`,
         day: date.getDate(),
         month: date.getMonth() + 1,
         year: date.getFullYear(),
