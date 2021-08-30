@@ -25,7 +25,6 @@ exports.sendMail = async (req, res, next) => {
     await receiptController.createOneNoReturnResponse(req, res, next);
   }
   const receipt = await Receipt.findOne({ SID: req.params.id });
-  console.log(receipt)
   const mailOptions = {
     from: process.env.GMAIL_EMAIL,
     to: receipt.Email,
