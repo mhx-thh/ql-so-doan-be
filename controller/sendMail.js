@@ -1,13 +1,16 @@
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
-const handlebars = require('handlebars');
-const fs = require('fs');
-const pdf = require('html-pdf');
-const AppError = require('../utils/appError');
 const Receipt = require("../models/receipt");
 const receiptController = require('./receipt');
 
 exports.sendMail = async (req, res, next) => {
+  // const transporter = nodemailer.createTransport({
+  //   service: 'gmail',
+  //   auth: {
+  //       user: process.env.GMAIL_EMAIL,
+  //       pass: process.env.GMAIL_PASSWORD
+  //   }
+  // });
   const transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
@@ -22,6 +25,7 @@ exports.sendMail = async (req, res, next) => {
     await receiptController.createOneNoReturnResponse(req, res, next);
   }
   const receipt = await Receipt.findOne({ SID: req.params.id });
+  console.log(receipt)
   const mailOptions = {
     from: process.env.GMAIL_EMAIL,
     to: receipt.Email,

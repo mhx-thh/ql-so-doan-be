@@ -7,7 +7,7 @@ const StatusCodes = require('http-status-codes');
 const AppError = require('../utils/appError');
 const axios = require('axios');
 
-//Tìm hết sỗ đoàn
+//Tìm hết sổ đoàn
 exports.getAllBook = handler.getAll(Book);
 //Tìm theo MSSV
 exports.getBookById = async (req, res, next) => {
