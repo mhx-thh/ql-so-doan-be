@@ -27,8 +27,7 @@ const bookSchema = mongoose.Schema({
     },
     //Chi đoàn
     Class: {
-        type: String,
-        required: true
+        type: String
     },
     //Khoa
     Faculty: {

@@ -5,6 +5,8 @@ const sendResponse = require('../utils/sendResponse');
 const sendMailController = require('./sendMail');
 const StatusCodes = require('http-status-codes');
 const AppError = require('../utils/appError');
+const axios = require('axios');
+
 //Tìm hết sỗ đoàn
 exports.getAllBook = handler.getAll(Book);
 //Tìm theo MSSV
@@ -73,8 +75,8 @@ exports.updateBookById = async (req, res, next) => {
 exports.deleteBookById = async (req, res, next) => {
     const book = await Book.findOne({ SID: req.params.id });
     if (book) {
-        await Book.deleteOne({ _id: book._id });
-        return sendResponse('success', StatusCodes.NO_CONTENT, res);
+        await Book.deleteOne({ SID: book.SID });
+        return res.status(201).json({ "message": "Successfull!" });
     } else {
         return next(new AppError('No document found!', StatusCodes.NOT_FOUND));
     }
@@ -119,6 +121,26 @@ exports.RemoveYouth = async (req, res, next) => {
     book.save();
     return sendResponse(book, StatusCodes.OK, res);
 };
+exports.recaptcha = (req, res, next) => {
+    if (!req.body.captcha) {
+        res.status(404).json({ 'message': 'Captcha token is undefined!' });
+    }
+    const postData = `secret=${process.env.RECAPTCHASECRETKEY}&response=${req.body.captcha}`
+    axios
+        .post('https://www.google.com/recaptcha/api/siteverify', postData)
+        .then(response => {
+            //console.log(`statusCode: ${res.status}`)
+            //console.log(response.data);
+            if(response.data.score >= 0.4)
+                return res.json(response.data);
+            else
+                return res.json({ 'message': 'You might be a bot!'})
+        })
+        .catch(error => {
+            //console.error(error)
+        })
+}
+
 //Tìm theo ObjectID
 // exports.getBook = handler.getOne(Book);
 //Cập nhật theo ObjectID
