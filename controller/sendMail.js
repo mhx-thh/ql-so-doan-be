@@ -4,21 +4,21 @@ const Receipt = require("../models/receipt");
 const receiptController = require('./receipt');
 
 exports.sendMail = async (req, res, next) => {
-  // const transporter = nodemailer.createTransport({
-  //   service: 'gmail',
-  //   auth: {
-  //       user: process.env.GMAIL_EMAIL,
-  //       pass: process.env.GMAIL_PASSWORD
-  //   }
-  // });
-  const transporter = nodemailer.createTransport(smtpTransport({
+  const transporter = nodemailer.createTransport({
     service: 'gmail',
-    host: 'smtp.gmail.com',
     auth: {
-      user: process.env.GMAIL_EMAIL,
-      pass: process.env.GMAIL_PASSWORD
+        user: process.env.GMAIL_EMAIL,
+        pass: process.env.GMAIL_PASSWORD
     }
-  }));
+  });
+  // const transporter = nodemailer.createTransport(smtpTransport({
+  //   service: 'gmail',
+  //   host: 'smtp.gmail.com',
+  //   auth: {
+  //     user: process.env.GMAIL_EMAIL,
+  //     pass: process.env.GMAIL_PASSWORD
+  //   }
+  // }));
 
   const find = await Receipt.findOne({ SID: req.params.id });
   if (find === null) {
