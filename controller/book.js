@@ -55,8 +55,7 @@ exports.createBook = async (req, res, next) => {
         DJCP: req.body.DJCP,
         PositionHSU: req.body.PositionHSU,
         ClassOfficePosition: req.body.ClassOfficePosition,
-        Talent: req.body.Talent,
-        Faculty: req.body.Faculity
+        Talent: req.body.Talent
     });
     book.save();
     return res.status(201).json({ "message": "Book created!" });
