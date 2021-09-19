@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 const app = express();
 dotenv.config({ path: './.env' });
@@ -24,22 +25,8 @@ mongoose.connect(
     console.log('Connection failed');
   });
 
-app.use(express.json());
-app.use(express.urlencoded({
-  extended: true
-}));
-
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Request-With, Content-Type, Accept, Authorization');
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'POST,GET,PUT,PATCH,DELETE,OPTIONS'
-  );
-  next();
-});
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 app.use('/api/user', userRoutes); // Tài khoản
 app.use('/api/book', bookRoutes); // Sổ đoàn
