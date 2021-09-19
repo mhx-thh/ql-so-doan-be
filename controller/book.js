@@ -6,8 +6,8 @@ exports.getAllBook = handler.getAll(Book);
 exports.getOneBookBySId = handler.getOne(Book, { query: 'SID' })
 exports.getOneBook = handler.getOne(Book);
 exports.createBook = handler.createOne(Book);
-exports.updateBook = hander.updateOne(Book);
-exports.deleteBook = hander.deleteOne(Book);
+exports.updateBook = handler.updateOne(Book);
+exports.deleteBook = handler.deleteOne(Book);
 
 exports.recaptcha = (req, res, next) => {
     if (!req.body.captcha) {

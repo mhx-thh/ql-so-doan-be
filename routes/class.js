@@ -8,7 +8,7 @@ const ClassController = require('../controller/class');
 // sửa lớp
 // xóa lớp
 
-router.get('', ClassController.getAllClass);
+router.get('/', ClassController.getAllClass);
 router.post('/', ClassController.createClass);
 router.put('/:id', ClassController.updateClassById);
 router.delete('/:id', ClassController.deleteClassById);

@@ -1,7 +1,13 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const handler = require('../utils/handlerFactory');
 
 const User = require("../models/user");
+
+exports.getAllUser = handler.getAll(User);
+exports.getOneUserById = handler.getOne(User);
+exports.updateUserById = handler.updateOne(User);
+exports.deleteUserById = handler.deleteOne(User);
 
 exports.createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
@@ -55,26 +61,4 @@ exports.userLogin = async (req, res, next) => {
       message: "Không tìm thấy người dùng!"
     })
   }
-}
-
-exports.updateUser = async (req, res, next) => {
-  let user = await User.findOne({ email: req.body.email });
-  await User.updateOne({ _id: user._id }, {
-    $set: {
-      name: req.body.name
-    }
-  })
-  await user.save();
-
-  return res.status(201).json({
-    name: req.body.name
-  })
-}
-
-exports.checkExistUser = async (req, res, next) => {
-  let user = await User.findOne({ email: req.body.email });
-  if (user) {
-    return res.status(401).json({ message: "Email is used!" });
-  }
-  return res.status(200).json({ message: "Email can use!" });
 }

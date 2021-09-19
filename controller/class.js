@@ -3,5 +3,5 @@ const handler = require('../utils/handlerFactory');
 
 exports.getAllClass = handler.getAll(ClassModel);
 exports.createClass = handler.createOne(ClassModel);
-exports.updateClassById = hander.updateOne(ClassModel);
-exports.deleteClassById = hander.deleteOne(ClassModel);
+exports.updateClassById = handler.updateOne(ClassModel);
+exports.deleteClassById = handler.deleteOne(ClassModel);

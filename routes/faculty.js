@@ -8,7 +8,7 @@ const FacultyController = require('../controller/faculty');
 // sửa khoa
 // xóa khoa
 
-router.get('', FacultyController.getAllFaculty);
+router.get('/', FacultyController.getAllFaculty);
 router.post('/', FacultyController.createFaculty);
 router.put('/:id', FacultyController.updateFacultyById);
 router.delete('/:id', FacultyController.deleteFacultyById);

@@ -8,7 +8,7 @@ const School_Years = require('../controller/school_years');
 // sửa Năm học
 // xóa Năm học
 
-router.get('', School_Years.getAllSchoolYear);
+router.get('/', School_Years.getAllSchoolYear);
 router.get('/:id', School_Years.getOneSchoolYearById);
 router.post('/', School_Years.createSchoolYear);
 router.put('/:id', School_Years.updateSchoolYearById);

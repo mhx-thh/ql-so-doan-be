@@ -11,10 +11,10 @@ const { paging } = require('../controller/middleCtrl');
 // xóa sổ đoàn
 
 router.get('/:sid', BookController.getOneBookBySId);
-router.get('', paging, BookController.getAllBook);
+router.get('/', paging, BookController.getAllBook);
 router.post('/', BookController.createBook);
-router.put('/:id', BookController.updateBookById);
-router.delete('/:id', BookController.deleteBookById);
+router.put('/:id', BookController.updateBook);
+router.delete('/:id', BookController.deleteBook);
 
 // capcha
 

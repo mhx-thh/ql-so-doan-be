@@ -8,8 +8,8 @@ const RequestController = require('../controller/request');
 // sửa Yêu cầu
 // xóa Yêu cầu
 
-router.get('', RequestController.getAll);
-router.get('/:id', RequestController.getPlace);
+router.get('/', RequestController.getAllRequest);
+router.get('/:id', RequestController.getOneRequestById);
 router.post('/', RequestController.createRequest);
 router.put('/:id', RequestController.updateRequestById);
 router.delete('/:id', RequestController.deleteRequestById);
