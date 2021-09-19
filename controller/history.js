@@ -6,6 +6,7 @@ exports.getHistory = handler.getOne(History);
 // exports.createHistory = handler.createOne(History);
 
 exports.createHistory = async (req, res, next) => {
+    const data = req.query
     const history = await History.create({
         SID: req.body.SID,
         PlaceID: req.body.PlaceID,

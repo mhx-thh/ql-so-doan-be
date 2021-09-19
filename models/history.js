@@ -6,8 +6,8 @@ const historySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    //Mã địa điểm
-    PlaceID: {
+    //Mã chi đoàn chuyển
+    ClassID: {
         type: String,
         required: true,
     },

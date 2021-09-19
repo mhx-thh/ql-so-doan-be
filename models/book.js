@@ -29,11 +29,7 @@ const bookSchema = mongoose.Schema({
     Class: {
         type: String
     },
-    //Khoa
-    Faculty: {
-        type: String,
-        required: true
-    },
+
     //SDT
     Phone: {
         type: String,
@@ -69,7 +65,7 @@ const bookSchema = mongoose.Schema({
         type: String,
         default: null
     },
-    // //Trạng thái
+    //Trạng thái
     Status: {
         type: String,
         default: null

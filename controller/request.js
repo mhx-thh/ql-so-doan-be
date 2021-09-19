@@ -1,4 +1,4 @@
-const Place = require('../models/place');
+const Place = require('../models/request');
 const handler = require('../utils/handlerFactory');
 
 exports.getAll = handler.getAll(Place);

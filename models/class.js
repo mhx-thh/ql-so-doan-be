@@ -2,8 +2,15 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const classSchema = mongoose.Schema({
-  id: { type: String, required: true, unique: true },
-  faculty: { type: String, require: true }
+  id: { 
+    type: String, 
+    required: true, 
+    unique: true 
+  },
+  facultyId: { 
+    type: String, 
+    require: true 
+  }
 });
 
 classSchema.plugin(uniqueValidator);

@@ -3,10 +3,14 @@ const router = express.Router();
 
 const ClassController = require('../controller/class');
 
-router.get('/:id', ClassController.getClassByNameOfFaculty);
+// lấy danh sách
+// tạo lớp
+// sửa lớp
+// xóa lớp
+
 router.get('', ClassController.getAllClass);
-router.post('/create', ClassController.createClass);
-router.put('/update/:id', ClassController.updateClassById);
-router.delete('/delete/:id', ClassController.deleteClassById);
+router.post('/', ClassController.createClass);
+router.put('/:id', ClassController.updateClassById);
+router.delete('/:id', ClassController.deleteClassById);
 
 module.exports = router;

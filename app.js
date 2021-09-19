@@ -2,24 +2,18 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-const postsRoutes = require('./routes/posts');
-const userRoutes = require('./routes/user');
-const payRoutes = require('./routes/pay');
-const sendMailRoutes = require('./routes/sendMail');
-const classRoutes = require('./routes/class');
-const facultyRoutes = require('./routes/faculty');
-const bookRoutes = require('./routes/book');
-const approvedRoutes = require('./routes/approved_books');
-const yearRoutes = require('./routes/school_years');
-const notificationRoutes = require('./routes/notification');
-const historyRoutes = require('./routes/history');
-const placeRoutes = require('./routes/place');
-const receiptRoutes = require('./routes/receipt')
-const errorHandler = require('./utils/errorHandler');
-const AppError = require('./utils/appError');
-
 const app = express();
 dotenv.config({ path: './.env' });
+
+const userRoutes = require('./routes/user');
+const bookRoutes = require('./routes/book');
+const placeRoutes = require('./routes/place');
+const classRoutes = require('./routes/class');
+const histotyRoutes = require('./routes/history');
+const requestRoutes = require('./routes/request');
+
+const errorHandler = require('./utils/errorHandler');
+const AppError = require('./utils/appError');
 
 mongoose.connect(
   process.env.MONGOOSE_URL,
@@ -47,19 +41,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/posts', postsRoutes);
-app.use('/api/user', userRoutes);
-app.use('/api/pay', payRoutes);
-app.use('/api/sendMail', sendMailRoutes);
-app.use('/api/class', classRoutes);
-app.use('/api/faculty', facultyRoutes);
-app.use('/api/book', bookRoutes);
-app.use('/api/approved', approvedRoutes);
-app.use('/api/year', yearRoutes);
-app.use('/api/notification', notificationRoutes);
-app.use('/api/history', historyRoutes);
-app.use('/api/place', placeRoutes);
-app.use('/api/receipt', receiptRoutes);
+app.use('/api/user', userRoutes); // Tài khoản
+app.use('/api/book', bookRoutes); // Sổ đoàn
+app.use('/api/place', placeRoutes); // Vị trí lưu trữ
+app.use('/api/class', classRoutes); // Danh sách chi đoàn
+app.use('/api/history', histotyRoutes); // Lịch sử lưu trữ sổ đoàn
+app.use('/api/request', requestRoutes); // Yêu cầu gửi lên admin duyệt
+
 app.all('*', (request, response, next) => {
   next(new AppError(`Can't find ${request.originalUrl} on this server!`, 404));
 });
