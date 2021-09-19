@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
-const SchoolYearSchema = mongoose.Schema({
+const SchoolYearSchema = new mongoose.Schema({
     Year: { 
         type: String, 
-        required: true 
+        required: true,
+        unique: true,
     }
 });
 

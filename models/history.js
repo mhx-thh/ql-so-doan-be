@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
 
-const historySchema = mongoose.Schema({
-    //MSSV
-    SID: {
-        type: String,
-        required: true
+const historySchema = new mongoose.Schema({
+    // Sổ đoàn
+    Book: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Book',
+        required: [true, 'History must belong to an Book'],
     },
-    //Mã chi đoàn chuyển
-    ClassID: {
-        type: String,
-        required: true,
+    // Mã chi đoàn chuyển
+    Class: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Class',
+        required: [true, 'History must belong to an Class'],
     },
     //Nội dung chuyển sổ đoàn
     Content: {

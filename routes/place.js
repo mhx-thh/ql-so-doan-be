@@ -8,10 +8,9 @@ const PlaceController = require('../controller/place');
 // sửa Vị trí
 // xóa Vị trí
 
-router.get('', PlaceController.getAll);
-router.get('/:id', PlaceController.getPlace);
+router.get('', PlaceController.getAllPlace);
 router.post('/', PlaceController.createPlace);
-router.put('/:id', PlaceController.updatePlace);
-router.delete('/:id', PlaceController.deletePlace);
+router.put('/:id', PlaceController.updatePlaceById);
+router.delete('/:id', PlaceController.deletePlaceById);
 
 module.exports = router;

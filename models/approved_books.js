@@ -1,18 +1,23 @@
 const mongoose = require('mongoose');
 
-const ApprovedSchema = mongoose.Schema({
-    SID: {
-        type: String,
-        required: true,
-        unique: true
+const ApprovedSchema = new mongoose.Schema({
+    Book: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Book',
+        required: [true, 'Approved must belong to an Book'],
     },
     Approval: {
         type: String,
         default: 'Đã duyệt'
     },
     Year: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'SchoolYear',
+        required: [true, 'Approved must belong to an Year'],
+    },
+    Note: {
         type: String,
-        required: true
+        default: ''
     }
 });
 

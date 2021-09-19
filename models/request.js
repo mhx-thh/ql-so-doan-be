@@ -1,23 +1,22 @@
 const mongoose = require('mongoose');
 
-const requestSchema = mongoose.Schema({
-    //Mã
-    id: {
-        type: String,
-        required: true,
-        unique: true
+const requestSchema = new mongoose.Schema({
+    Book: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Book',
+        required: [true, 'Request must belong to an Book'],
     },
     // Loại
-    type: {
+    Type: {
         type: String,
         enum: ["profile", "rut_so_doan", "chuyen_chi_doan"],
         required: true,
     },
-    title: {
+    Title: {
         type: String,
         required: true,
     },
-    content: {
+    Content: {
         type: String,
         required: true,
     }

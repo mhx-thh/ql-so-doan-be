@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
-const bookSchema = mongoose.Schema({
+const bookSchema = new mongoose.Schema({
     //MSSV
     SID: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
     },
     //Tên
     Name: {
@@ -25,9 +26,16 @@ const bookSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    //Chi đoàn
+    // Chi đoàn
     Class: {
-        type: String
+        type: mongoose.Schema.ObjectId,
+        ref: 'Class',
+    },
+
+    // Nghị quyết số
+    NumberApproved: {
+        required: true,
+        type: Number,
     },
 
     //SDT
@@ -65,15 +73,11 @@ const bookSchema = mongoose.Schema({
         type: String,
         default: null
     },
-    //Trạng thái
-    Status: {
-        type: String,
-        default: null
-    },
+
     //Duyệt
     Approval: {
-        type: String,
-        default: null
+        type: Boolean,
+        default: false,
     }
 });
 

@@ -1,15 +1,8 @@
-const School_Years = require('../models/school_years');
-// const StatusCodes = require('http-status-codes');
-// const sendResponse = require('../utils/sendResponse');
+const SchoolYearsModel = require('../models/school_years');
 const handler = require('../utils/handlerFactory');
-// const AppError = require('../utils/appError');
 
-exports.getAll = handler.getAll(School_Years);
-
-exports.getOne = handler.getOne(School_Years);
-
-exports.create = handler.createOne(School_Years);
-
-exports.update = handler.updateOne(School_Years);
-
-exports.delete = handler.deleteOne(School_Years);
+exports.getAllSchoolYear = handler.getAll(SchoolYearsModel);
+exports.getOneSchoolYearById = handler.getOne(SchoolYearsModel);
+exports.createSchoolYear = handler.createOne(SchoolYearsModel);
+exports.updateSchoolYearById = handler.updateOne(SchoolYearsModel);
+exports.deleteSchoolYearById = handler.deleteOne(SchoolYearsModel);

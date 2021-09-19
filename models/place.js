@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const placeSchema = mongoose.Schema({
-    //Mã địa điểm
-    id: {
+const placeSchema = new mongoose.Schema({
+    // Mã địa điểm
+    ShortHand: {
         type: String,
         required: true,
         unique: true
     },
-    //Tên địa điểm
+    // Tên địa điểm
     Name: {
         type: String,
         required: true,

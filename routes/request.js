@@ -10,8 +10,8 @@ const RequestController = require('../controller/request');
 
 router.get('', RequestController.getAll);
 router.get('/:id', RequestController.getPlace);
-router.post('/', RequestController.createPlace);
-router.put('/:id', RequestController.updatePlace);
-router.delete('/:id', RequestController.deletePlace);
+router.post('/', RequestController.createRequest);
+router.put('/:id', RequestController.updateRequestById);
+router.delete('/:id', RequestController.deleteRequestById);
 
 module.exports = router;

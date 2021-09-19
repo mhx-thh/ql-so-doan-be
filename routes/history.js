@@ -8,10 +8,10 @@ const historyController = require('../controller/history');
 // sửa lịch sử
 // xóa lịch sử
 
-router.get('', historyController.getAll);
-router.get('/:id', historyController.getHistoryById);
+router.get('', historyController.getAllHistory);
+router.get('/:id', historyController.getOneHistoryById);
 router.post('/', historyController.createHistory);
-router.put('/:id', historyController.saveHistory);
+router.put('/:id', historyController.updateHistoryById);
 router.delete('/:id', historyController.deleteHistoryById);
 
 module.exports = router;

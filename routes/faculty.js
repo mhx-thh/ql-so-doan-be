@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-const facultyController = require('../controller/faculty');
+const FacultyController = require('../controller/faculty');
 
 // lấy danh sách
 // tạo khoa
 // sửa khoa
 // xóa khoa
 
-router.get('', facultyController.getListNameFaculties);
-router.post('/', facultyController.addfaculty);
-router.put('/:id', facultyController.updatefaculty);
-router.delete('/:id', facultyController.deletefaculty);
+router.get('', FacultyController.getAllFaculty);
+router.post('/', FacultyController.createFaculty);
+router.put('/:id', FacultyController.updateFacultyById);
+router.delete('/:id', FacultyController.deleteFacultyById);
 
 module.exports = router;

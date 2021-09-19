@@ -1,18 +1,26 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-const classSchema = mongoose.Schema({
-  id: { 
-    type: String, 
-    required: true, 
-    unique: true 
+const classSchema = new mongoose.Schema({
+  Name: {
+    type: String,
+    required: true,
+    unique: true,
   },
-  facultyId: { 
-    type: String, 
-    require: true 
+  Faculty: { 
+    type: mongoose.Schema.ObjectId,
+    ref: 'Facuty',
+    required: [true, 'Class must belong to an Facuty'],
   }
 });
 
 classSchema.plugin(uniqueValidator);
+
+classSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'Faculty',
+  });
+  next();
+});
 
 module.exports = mongoose.model('Class', classSchema);
