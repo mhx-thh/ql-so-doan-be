@@ -31,6 +31,8 @@ mongoose.connect(
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
+app.use(express.json({ limit: '20kb' }));
+
 // middleware to show log on console
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
