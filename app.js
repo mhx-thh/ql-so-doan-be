@@ -9,6 +9,7 @@ dotenv.config({ path: './.env' });
 const userRoutes = require('./routes/user');
 const bookRoutes = require('./routes/book');
 const placeRoutes = require('./routes/place');
+const facultyRoutes = require('./routes/faculty');
 const classRoutes = require('./routes/class');
 const histotyRoutes = require('./routes/history');
 const requestRoutes = require('./routes/request');
@@ -31,6 +32,7 @@ app.use(cors());
 app.use('/api/user', userRoutes); // Tài khoản
 app.use('/api/book', bookRoutes); // Sổ đoàn
 app.use('/api/place', placeRoutes); // Vị trí lưu trữ
+app.use('/api/faculty', facultyRoutes); // Danh sách khoa
 app.use('/api/class', classRoutes); // Danh sách chi đoàn
 app.use('/api/history', histotyRoutes); // Lịch sử lưu trữ sổ đoàn
 app.use('/api/request', requestRoutes); // Yêu cầu gửi lên admin duyệt
