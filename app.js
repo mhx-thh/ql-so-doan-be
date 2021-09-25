@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const morgan = require('morgan');
 const cors = require('cors');
 
-const app = express();
 dotenv.config({ path: './.env' });
 
 const userRoutes = require('./routes/user');
@@ -14,8 +14,10 @@ const classRoutes = require('./routes/class');
 const histotyRoutes = require('./routes/history');
 const requestRoutes = require('./routes/request');
 
-const errorHandler = require('./utils/errorHandler');
 const AppError = require('./utils/appError');
+const errorHandler = require('./utils/errorHandler');
+
+const app = express();
 
 mongoose.connect(
   process.env.MONGOOSE_URL,
@@ -28,6 +30,15 @@ mongoose.connect(
 
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+
+// middleware to show log on console
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+} else {
+  app.use(morgan('combined', {
+    skip(req, res) { return res.statusCode < 400; }, // only log error responses
+  }));
+}
 
 app.use('/api/user', userRoutes); // Tài khoản
 app.use('/api/book', bookRoutes); // Sổ đoàn

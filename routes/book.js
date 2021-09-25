@@ -10,7 +10,7 @@ const { paging } = require('../controller/middleCtrl');
 // gửi biên nhận
 // xóa sổ đoàn
 
-router.get('/:sid', BookController.getOneBookBySId);
+router.get('/:SID', BookController.getOneBookBySId);
 router.get('/', paging, BookController.getAllBook);
 router.post('/', BookController.createBook);
 router.put('/:id', BookController.updateBook);

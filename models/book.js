@@ -78,7 +78,25 @@ const bookSchema = new mongoose.Schema({
     Approval: {
         type: Boolean,
         default: false,
+    },
+    // Vị trí lưu sổ
+    Place: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Place',
+        default: null,
     }
 });
+
+bookSchema.pre(/^find/, function (next) {
+    this.populate({
+      path: 'Class',
+      select: "_id Name"
+    })
+    .populate({
+        path: 'Place',
+        select: "_id ShortHand"
+      });
+    next();
+  });
 
 module.exports = mongoose.model('Book', bookSchema);

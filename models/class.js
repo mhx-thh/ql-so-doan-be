@@ -9,7 +9,7 @@ const classSchema = new mongoose.Schema({
   },
   Faculty: { 
     type: mongoose.Schema.ObjectId,
-    ref: 'Facuty',
+    ref: 'Faculty',
     required: [true, 'Class must belong to an Facuty'],
   }
 });
@@ -19,6 +19,7 @@ classSchema.plugin(uniqueValidator);
 classSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'Faculty',
+    select: "_id NameShort NameFull"
   });
   next();
 });

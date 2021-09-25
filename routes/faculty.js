@@ -9,6 +9,7 @@ const FacultyController = require('../controller/faculty');
 // xóa khoa
 
 router.get('/', FacultyController.getAllFaculty);
+router.get('/:id', FacultyController.getOneFacultyById);
 router.post('/', FacultyController.createFaculty);
 router.put('/:id', FacultyController.updateFacultyById);
 router.delete('/:id', FacultyController.deleteFacultyById);
