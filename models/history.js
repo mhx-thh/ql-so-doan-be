@@ -13,17 +13,25 @@ const historySchema = new mongoose.Schema({
         ref: 'Class',
         required: [true, 'History must belong to an Class'],
     },
-    //Nội dung chuyển sổ đoàn
+    // Nội dung chuyển sổ đoàn
     Content: {
         type: String,
         required: true
     },
-    //Thời gian sửa chữa lần cuối
+    // Thời gian sửa chữa lần cuối
     Time: {
         type: Date,
         required: true,
         default: Date.now()
     }
+});
+
+historySchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'Class',
+    select: "_id Name"
+  });
+  next();
 });
 
 module.exports = mongoose.model('History', historySchema);

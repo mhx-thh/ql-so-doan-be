@@ -2,7 +2,7 @@ const Book = require("../models/book");
 const handler = require('../utils/handlerFactory');
 const axios = require('axios');
 
-exports.getAllBook = handler.getAll(Book);
+exports.getAllBook = handler.getAll(Book, {populate: 'requests histories'});
 exports.getOneBookBySId = handler.getOne(Book, { query: 'SID' })
 exports.getOneBook = handler.getOne(Book);
 exports.createBook = handler.createOne(Book);

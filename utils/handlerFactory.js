@@ -11,13 +11,18 @@ exports.createOne = (Model) => catchAsync(async (request, response, next) => {
   sendResponse(document, StatusCodes.CREATED, response);
 });
 
-exports.getAll = (Model) => catchAsync(async (request, response, next) => {
+exports.getAll = (Model, Option = {}) => catchAsync(async (request, response, next) => {
   const {
     skip, limit, sort, filter,
   } = queryToMongo({})(request.query);
+
+  let query = Model.find(filter).sort(sort).skip(skip).limit(limit)
+  if (Option.populate) query = query.populate(Option.populate);
+  if (Option.select) query.select(Option.select);
+
   const [total, result] = await Promise.all([
     Model.countDocuments(filter),
-    Model.find(filter).sort(sort).skip(skip).limit(limit),
+    query,
   ]);
 
   return sendResponse({ total, returned: result.length, result }, StatusCodes.OK, response);

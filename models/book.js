@@ -85,6 +85,23 @@ const bookSchema = new mongoose.Schema({
         ref: 'Place',
         default: null,
     }
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+});
+
+// vitural full class
+bookSchema.virtual('requests', {
+    ref: 'Request',
+    foreignField: 'Book',
+    localField: '_id',
+    options: { sort: { updatedAt: -1 } }
+  });
+bookSchema.virtual('histories', {
+    ref: 'History',
+    foreignField: 'Book',
+    localField: '_id',
+    options: { sort: { Time: -1 } }
 });
 
 bookSchema.pre(/^find/, function (next) {

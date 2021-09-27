@@ -19,7 +19,14 @@ const requestSchema = new mongoose.Schema({
     Content: {
         type: String,
         required: true,
-    }
+    },
+    Status: {
+        type: String,
+        enum: ["init", "done", "doing"],
+        default: "init",
+    },
+}, {
+    timestamps: true,
 });
 
 module.exports = mongoose.model('Request', requestSchema);
